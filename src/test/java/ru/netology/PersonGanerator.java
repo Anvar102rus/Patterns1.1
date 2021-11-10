@@ -32,6 +32,18 @@ public class PersonGanerator {
 
         public AuthUser(String username, String password, String active) {
         }
+
+        public String getLogin() {
+            return login;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public String getStatus() {
+            return status;
+        }
     }
 
     private static void sendRequest(AuthUser user) {
