@@ -24,16 +24,16 @@ public class AuthTest {
 
     @Test
     void shouldSendValidActiveUser() {
-        $("[data-test-id=login] .input__control").sendKeys(activeUser.getLogin());
-        $("[data-test-id=password] .input__control").sendKeys(activeUser.getPassword());
+        $("[data-test-id=login] .input__control").sendKeys(activeUser.login);
+        $("[data-test-id=password] .input__control").sendKeys(activeUser.password);
         $("[data-test-id=action-login]").click();
         $(byText("Личный кабинет")).shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @Test
     void shouldSendValidBlockedUser(){
-        $("[data-test-id=login] .input__control").sendKeys(blockedUser.getLogin());
-        $("[data-test-id=password] .input__control").sendKeys(blockedUser.getPassword());
+        $("[data-test-id=login] .input__control").sendKeys(blockedUser.login);
+        $("[data-test-id=password] .input__control").sendKeys(blockedUser.password);
         $("[data-test-id=action-login]").click();
         $(".notification_status_error").shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id=error-notification]  .notification__title")
@@ -44,8 +44,8 @@ public class AuthTest {
 
     @Test
     void shouldSendInvalidPassword(){
-        $("[data-test-id=login] .input__control").sendKeys(invalidPassword.getLogin());
-        $("[data-test-id=password] .input__control").sendKeys(invalidPassword.getPassword());
+        $("[data-test-id=login] .input__control").sendKeys(invalidPassword.login);
+        $("[data-test-id=password] .input__control").sendKeys(invalidPassword.password);
         $("[data-test-id=action-login]").click();
         $("[data-test-id=error-notification]").shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id=error-notification]  .notification__title")
@@ -56,8 +56,8 @@ public class AuthTest {
 
     @Test
     void shouldSendInvalidLogin(){
-        $("[data-test-id=login] .input__control").sendKeys(invalidLogin.getLogin());
-        $("[data-test-id=password] .input__control").sendKeys(invalidLogin.getPassword());
+        $("[data-test-id=login] .input__control").sendKeys(invalidLogin.login);
+        $("[data-test-id=password] .input__control").sendKeys(invalidLogin.password);
         $("[data-test-id=action-login]").click();
         $("[data-test-id=error-notification]").shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id=error-notification]  .notification__title")
