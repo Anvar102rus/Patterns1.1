@@ -24,8 +24,8 @@ public class AuthTest {
 
     @Test
     void shouldSendValidActiveUser() {
-        $("[data-test-id=login] .input__control").sendKeys(activeUser.login);
-        $("[data-test-id=password] .input__control").sendKeys(activeUser.password);
+        $("[data-test-id=login] .input__control").sendKeys(activeUser.getLogin);
+        $("[data-test-id=password] .input__control").sendKeys(activeUser.getPassword);
         $("[data-test-id=action-login]").click();
         $(byText("Личный кабинет")).shouldBe(visible, Duration.ofSeconds(15));
     }

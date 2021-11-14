@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
+import io.restassured.internal.filter.SendRequestFilter;
 import io.restassured.specification.RequestSpecification;
 import lombok.Value;
 
@@ -19,7 +20,7 @@ public class PersonGanerator {
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
-    private static final Faker faker = new Faker(new Locale("ru"));
+    private static final Faker faker = new Faker(new Locale("en"));
 
     private PersonGanerator() {
     }
@@ -30,8 +31,7 @@ public class PersonGanerator {
         String password;
         String status;
 
-        public AuthUser(String username, String password, String active) {
-        }
+
 
 
         private static void sendRequest(AuthUser user) {
@@ -43,8 +43,7 @@ public class PersonGanerator {
                     .then() // "тогда ожидаем"
                     .statusCode(200); // код 200 OK
         }
-
-        public static AuthUser getValidActiveUser() {
+        public static AuthUser getValidActuveUser(){
             AuthUser activeUser = new AuthUser(
                     faker.name().username(),
                     faker.internet().password(),
@@ -52,6 +51,8 @@ public class PersonGanerator {
             sendRequest(activeUser);
             return activeUser;
         }
+
+
 
         public static AuthUser getValidBlockedUser() {
             AuthUser blockedUser = new AuthUser(
