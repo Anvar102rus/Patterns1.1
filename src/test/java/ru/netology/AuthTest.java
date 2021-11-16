@@ -12,10 +12,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class AuthTest {
-    private final PersonGanerator.AuthUser activeUser = PersonGanerator.getValidActiveUser();
-    private final PersonGanerator.AuthUser blockedUser = PersonGanerator.getValidBlockedUser();
-    private final PersonGanerator.AuthUser invalidPassword = PersonGanerator.getInvalidPassword();
-    private final PersonGanerator.AuthUser invalidLogin = PersonGanerator.getInvalidLogin();
+    private final PersonGanerator.AuthUser activeUser = PersonGanerator.AuthUser.getValidActuveUser();
+    private final PersonGanerator.AuthUser blockedUser = PersonGanerator.AuthUser.getValidBlockedUser();
+    private final PersonGanerator.AuthUser invalidPassword = PersonGanerator.AuthUser.getInvalidPassword();
+    private final PersonGanerator.AuthUser invalidLogin = PersonGanerator.AuthUser.getInvalidLogin();
 
     @BeforeEach
     void setupClass() {
@@ -24,8 +24,8 @@ public class AuthTest {
 
     @Test
     void shouldSendValidActiveUser() {
-        $("[data-test-id=login] .input__control").sendKeys(activeUser.getLogin);
-        $("[data-test-id=password] .input__control").sendKeys(activeUser.getPassword);
+        $("[data-test-id=login] .input__control").sendKeys(activeUser.getLogin());
+        $("[data-test-id=password] .input__control").sendKeys(activeUser.getPassword());
         $("[data-test-id=action-login]").click();
         $(byText("Личный кабинет")).shouldBe(visible, Duration.ofSeconds(15));
     }
