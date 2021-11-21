@@ -24,13 +24,6 @@ public class UserGenerator {
     private UserGenerator() {
     }
 
-    @Value
-    public static class AuthUser {
-        String login;
-        String password;
-        String status;
-
-
     private static void sendRequest(AuthUser user) {
         given() // "дано"
                 .spec(requestSpec) // указываем, какую спецификацию используем
@@ -79,4 +72,10 @@ public class UserGenerator {
         return new AuthUser("invalidLogin", password, "active");
     }
 
+    @Value
+    public static class AuthUser {
+        String login;
+        String password;
+        String status;
+    }
 }
