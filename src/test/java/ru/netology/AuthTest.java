@@ -1,5 +1,6 @@
 package ru.netology;
 
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +13,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class AuthTest {
-    private final PersonGanerator.AuthUser activeUser = PersonGanerator.AuthUser.getValidActuveUser();
-    private final PersonGanerator.AuthUser blockedUser = PersonGanerator.AuthUser.getValidBlockedUser();
-    private final PersonGanerator.AuthUser invalidPassword = PersonGanerator.AuthUser.getInvalidPassword();
-    private final PersonGanerator.AuthUser invalidLogin = PersonGanerator.AuthUser.getInvalidLogin();
+    private final UserGenerator.AuthUser activeUser = UserGenerator.getValidActiveUser();
+    private final UserGenerator.AuthUser blockedUser = UserGenerator.getValidBlockedUser();
+    private final UserGenerator.AuthUser invalidPassword = UserGenerator.getInvalidPassword();
+    private final UserGenerator.AuthUser invalidLogin = UserGenerator.getInvalidLogin();
 
     @BeforeEach
     void setupClass() {
@@ -32,8 +33,8 @@ public class AuthTest {
 
     @Test
     void shouldSendValidBlockedUser(){
-        $("[data-test-id=login] .input__control").sendKeys(blockedUser.login);
-        $("[data-test-id=password] .input__control").sendKeys(blockedUser.password);
+        $("[data-test-id=login] .input__control").sendKeys(blockedUser.getLogin());
+        $("[data-test-id=password] .input__control").sendKeys(blockedUser.getPassword());
         $("[data-test-id=action-login]").click();
         $(".notification_status_error").shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id=error-notification]  .notification__title")
@@ -44,8 +45,8 @@ public class AuthTest {
 
     @Test
     void shouldSendInvalidPassword(){
-        $("[data-test-id=login] .input__control").sendKeys(invalidPassword.login);
-        $("[data-test-id=password] .input__control").sendKeys(invalidPassword.password);
+        $("[data-test-id=login] .input__control").sendKeys(invalidPassword.getLogin());
+        $("[data-test-id=password] .input__control").sendKeys(invalidPassword.getPassword());
         $("[data-test-id=action-login]").click();
         $("[data-test-id=error-notification]").shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id=error-notification]  .notification__title")
@@ -56,8 +57,8 @@ public class AuthTest {
 
     @Test
     void shouldSendInvalidLogin(){
-        $("[data-test-id=login] .input__control").sendKeys(invalidLogin.login);
-        $("[data-test-id=password] .input__control").sendKeys(invalidLogin.password);
+        $("[data-test-id=login] .input__control").sendKeys(invalidLogin.getLogin());
+        $("[data-test-id=password] .input__control").sendKeys(invalidLogin.getPassword());
         $("[data-test-id=action-login]").click();
         $("[data-test-id=error-notification]").shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id=error-notification]  .notification__title")
